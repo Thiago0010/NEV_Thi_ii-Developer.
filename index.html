@@ -1,0 +1,1125 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Portfólio | Thi_ii</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap');
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #1b2a41 0%, #0f1829 100%);
+      color: #e0e6e9;
+      line-height: 1.6;
+      overflow-x: hidden;
+      position: relative;
+      min-height: 100vh;
+      transition: background 0.3s, color 0.3s;
+    }
+    body.light-mode {
+      background: linear-gradient(135deg, #f0f6fc 0%, #d0e1f9 100%);
+      color: #222;
+    }
+
+    /* Fundo 3D sutil */
+    body::before, body::after {
+      content: "";
+      position: fixed;
+      top: -20%;
+      left: -20%;
+      width: 140vw;
+      height: 140vh;
+      pointer-events: none;
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: cover;
+      filter: blur(90px);
+      opacity: 0.07;
+      z-index: -2;
+      transform-style: preserve-3d;
+      will-change: transform;
+      transition: opacity 0.5s ease;
+    }
+    body::before {
+      background: radial-gradient(circle at 30% 40%, #2b3a59, transparent 70%);
+      transform: translateZ(0) translateX(0);
+    }
+    body::after {
+      background: radial-gradient(circle at 70% 70%, #162535, transparent 60%);
+      transform: translateZ(-10px) translateX(20px);
+    }
+    body.light-mode::before {
+      background: radial-gradient(circle at 30% 40%, #a3c5ff, transparent 70%);
+      opacity: 0.1;
+    }
+    body.light-mode::after {
+      background: radial-gradient(circle at 70% 70%, #8ab6ff, transparent 60%);
+      opacity: 0.1;
+    }
+
+    /* Scroll progress bar */
+    #scroll-progress {
+      position: fixed;
+      top: 0; left: 0;
+      height: 4px;
+      background: linear-gradient(90deg, #3a9bdc, #7ac7ff);
+      width: 0;
+      z-index: 9999;
+      transition: width 0.2s ease-out;
+      border-radius: 0 0 4px 4px;
+    }
+
+    header {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 20px 10%;
+      background: rgba(20, 30, 45, 0.85);
+      position: sticky; top: 0; backdrop-filter: saturate(180%) blur(8px);
+      z-index: 100;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.25);
+      transition: background 0.3s ease;
+    }
+    body.light-mode header {
+      background: rgba(240, 246, 252, 0.9);
+      box-shadow: 0 2px 10px rgba(150, 180, 255, 0.3);
+    }
+    header h1 {
+      font-weight: 700;
+      color: #70b3ff;
+      letter-spacing: 0.04em;
+      user-select: none;
+      text-shadow: 0 1px 3px rgba(0,0,0,0.3);
+    }
+    body.light-mode header h1 {
+      color: #004a99;
+      text-shadow: none;
+    }
+    nav a {
+      color: #c9d6e3;
+      text-decoration: none;
+      margin: 0 15px;
+      font-weight: 500;
+      font-size: 1rem;
+      transition: color 0.25s ease;
+      user-select: none;
+    }
+    nav a:hover, nav a:focus {
+      color: #70b3ff;
+      outline: none;
+    }
+    nav button {
+      margin-left: 12px;
+      padding: 6px 14px;
+      font-weight: 600;
+      border-radius: 30px;
+      border: none;
+      cursor: pointer;
+      background: #507dbb;
+      color: #fff;
+      font-size: 0.9rem;
+      user-select: none;
+      transition: background-color 0.3s ease;
+    }
+    nav button:hover, nav button:focus {
+      background: #70b3ff;
+      outline: none;
+    }
+    body.light-mode nav button {
+      background: #007bff;
+      color: #fff;
+    }
+    body.light-mode nav button:hover {
+      background: #0056b3;
+    }
+
+    section {
+      padding: 60px 10%;
+      max-width: 1100px;
+      margin: auto;
+      opacity: 0;
+      transform: translateY(15px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    h2 {
+      font-size: 2.8rem;
+      margin-bottom: 24px;
+      color: #70b3ff;
+      letter-spacing: 0.03em;
+      user-select: none;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+    }
+    body.light-mode h2 {
+      color: #0056b3;
+      text-shadow: none;
+    }
+
+    /* Hero */
+    .hero {
+      height: 90vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 0 10%;
+      user-select: none;
+    }
+    .hero h2 {
+      font-size: 3.2rem;
+      line-height: 1.15;
+      margin-bottom: 18px;
+      color: #a1c4fd;
+      text-shadow: 0 0 5px rgba(112, 179, 255, 0.7);
+      transition: color 0.4s ease;
+    }
+    body.light-mode .hero h2 {
+      color: #004a99;
+      text-shadow: none;
+    }
+    .hero p {
+      max-width: 720px;
+      margin: 0 auto 28px;
+      font-size: 1.15rem;
+      color: #b0c8ffcc;
+      user-select: none;
+      line-height: 1.45;
+      transition: color 0.4s ease;
+    }
+    body.light-mode .hero p {
+      color: #305496dd;
+    }
+    .btn {
+      background: #507dbb;
+      color: #fff;
+      padding: 14px 28px;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 1.1rem;
+      box-shadow: 0 4px 12px rgba(80, 125, 187, 0.45);
+      user-select: none;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+    .btn:hover, .btn:focus {
+      background: #70b3ff;
+      transform: scale(1.08);
+      outline: none;
+      box-shadow: 0 6px 18px rgba(112, 179, 255, 0.7);
+    }
+    body.light-mode .btn {
+      background: #004a99;
+      box-shadow: 0 4px 12px rgba(0, 74, 153, 0.45);
+    }
+    body.light-mode .btn:hover {
+      background: #0063cc;
+      box-shadow: 0 6px 18px rgba(0, 123, 255, 0.7);
+    }
+
+    /* Timeline */
+    .timeline {
+      position: relative;
+      padding-left: 35px;
+      border-left: 3px solid #507dbb;
+      user-select: none;
+    }
+    .marco {
+      position: relative;
+      margin-bottom: 40px;
+      opacity: 0;
+      transform: translateX(-20px);
+      animation-fill-mode: forwards;
+      animation-timing-function: ease-out;
+      animation-duration: 0.6s;
+      animation-name: slideInLeft;
+    }
+    .marco:nth-child(1) { animation-delay: 0.1s; }
+    .marco:nth-child(2) { animation-delay: 0.3s; }
+    .marco:nth-child(3) { animation-delay: 0.5s; }
+    .marco:nth-child(4) { animation-delay: 0.7s; }
+    .marco:nth-child(5) { animation-delay: 0.9s; }
+    @keyframes slideInLeft {
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+    .marco::before {
+      content: "";
+      position: absolute;
+      left: -21px;
+      top: 6px;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: #507dbb;
+      box-shadow: 0 0 8px rgba(80, 125, 187, 0.6);
+      transition: background-color 0.3s ease;
+    }
+    body.light-mode .marco::before {
+      background: #004a99;
+      box-shadow: 0 0 12px rgba(0, 74, 153, 0.8);
+    }
+    .marco h4 {
+      color: #507dbb;
+      margin-bottom: 6px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      user-select: text;
+    }
+    body.light-mode .marco h4 {
+      color: #004a99;
+    }
+    .marco small {
+      display: block;
+      margin-bottom: 8px;
+      color: #a0b1cc;
+      font-style: italic;
+      user-select: text;
+    }
+    .marco p {
+      color: #c0c9e5cc;
+      user-select: text;
+      line-height: 1.4;
+    }
+    body.light-mode .marco p {
+      color: #445a89cc;
+    }
+
+    /* Skills */
+    .skills {
+      display: grid;
+      grid-template-columns: repeat(auto-fit,minmax(180px,1fr));
+      gap: 18px;
+      text-align: center;
+      user-select: none;
+    }
+    .skill {
+      background: rgba(80,125,187,0.15);
+      padding: 20px;
+      border-radius: 12px;
+      font-weight: 600;
+      color: #4070c6;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+      box-shadow: 0 2px 8px rgba(80,125,187,0.1);
+      cursor: default;
+    }
+    .skill:hover, .skill:focus {
+      background-color: #70b3ffcc;
+      transform: translateY(-6px);
+      outline: none;
+      color: #003366;
+      box-shadow: 0 5px 20px rgba(80,125,187,0.5);
+    }
+    body.light-mode .skill {
+      background: #d0e1f9;
+      color: #004a99;
+      box-shadow: 0 2px 10px rgba(0,74,153,0.15);
+    }
+    body.light-mode .skill:hover {
+      background: #a9c7ff;
+      color: #001f4d;
+      box-shadow: 0 5px 18px rgba(0,74,153,0.4);
+    }
+
+    /* Services */
+    #services {
+      display: grid;
+      grid-template-columns: repeat(auto-fit,minmax(260px,1fr));
+      gap: 30px;
+      margin-top: 20px;
+      user-select: none;
+    }
+    .service {
+      background: rgba(80,125,187,0.12);
+      padding: 25px 20px;
+      border-radius: 16px;
+      box-shadow: 0 1px 8px rgba(80,125,187,0.12);
+      transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+    .service:hover, .service:focus {
+      background-color: #70b3ffdd;
+      transform: translateY(-6px);
+      box-shadow: 0 8px 25px rgba(80,125,187,0.35);
+      outline: none;
+    }
+    body.light-mode .service {
+      background: #d0e1f9;
+      box-shadow: 0 2px 15px rgba(0,74,153,0.2);
+    }
+    body.light-mode .service:hover {
+      background: #a9c7ff;
+      box-shadow: 0 8px 25px rgba(0,74,153,0.3);
+    }
+    .service h3 {
+      color: #305da0;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+    body.light-mode .service h3 {
+      color: #003366;
+    }
+    .service p {
+      color: #507dbbcc;
+      line-height: 1.4;
+    }
+    body.light-mode .service p {
+      color: #305496cc;
+    }
+
+    /* Projects */
+    .projects {
+      display: grid;
+      grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
+      gap: 22px;
+      margin-top: 20px;
+      user-select: none;
+    }
+    .project {
+      background: rgba(80,125,187,0.12);
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 0 20px rgba(80,125,187,0.08);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+    }
+    .project:hover, .project:focus {
+      transform: translateY(-8px);
+      box-shadow: 0 8px 30px rgba(80,125,187,0.3);
+      outline: none;
+    }
+    body.light-mode .project {
+      background: #e6f0ff;
+      box-shadow: 0 0 18px rgba(0,74,153,0.15);
+    }
+    body.light-mode .project:hover {
+      box-shadow: 0 10px 38px rgba(0,74,153,0.4);
+    }
+    .project img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      user-select: none;
+      transition: transform 0.3s ease;
+      border-bottom: 3px solid #507dbb;
+    }
+    .project:hover img {
+      transform: scale(1.05);
+    }
+    .project-info {
+      padding: 18px 14px;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+      color: #4070c6;
+    }
+    .project-info h3 {
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .project-info p {
+      flex-grow: 1;
+      font-size: 1rem;
+      line-height: 1.4;
+      color: #6992d1cc;
+      margin-bottom: 10px;
+    }
+    .project-info small {
+      font-style: italic;
+      font-weight: 600;
+      color: #86a9e1;
+      letter-spacing: 0.02em;
+    }
+    .project-info a.btn {
+      margin-top: 14px;
+      font-size: 0.95rem;
+      align-self: flex-start;
+      background: #507dbb;
+      color: #fff;
+      padding: 8px 16px;
+      border-radius: 25px;
+      box-shadow: 0 3px 10px rgba(80,125,187,0.35);
+      transition: background-color 0.3s ease, box-shadow 0.3s ease;
+      text-decoration: none;
+      user-select: none;
+    }
+    .project-info a.btn:hover, .project-info a.btn:focus {
+      background: #70b3ff;
+      box-shadow: 0 5px 18px rgba(112,179,255,0.7);
+      outline: none;
+    }
+    body.light-mode .project-info a.btn {
+      background: #004a99;
+      box-shadow: 0 3px 10px rgba(0,74,153,0.35);
+    }
+    body.light-mode .project-info a.btn:hover {
+      background: #0063cc;
+      box-shadow: 0 5px 18px rgba(0,123,255,0.7);
+    }
+
+    /* Certificates */
+    #certificates {
+      display: flex;
+      gap: 26px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 20px;
+      user-select: none;
+    }
+    .certificate {
+      background: rgba(80,125,187,0.15);
+      border-radius: 18px;
+      padding: 22px 18px;
+      max-width: 320px;
+      flex: 1 1 280px;
+      text-align: center;
+      box-shadow: 0 0 18px rgba(80,125,187,0.2);
+      cursor: default;
+      transition: box-shadow 0.3s ease, color 0.3s ease;
+    }
+    .certificate:hover, .certificate:focus {
+      box-shadow: 0 0 30px rgba(80,125,187,0.5);
+      outline: none;
+      color: #003366;
+      background-color: #70b3ffdd;
+    }
+    body.light-mode .certificate {
+      background: #d7e4ff;
+      box-shadow: 0 0 15px rgba(0,74,153,0.3);
+    }
+    body.light-mode .certificate:hover {
+      box-shadow: 0 0 28px rgba(0,74,153,0.6);
+      background-color: #a9c7ff;
+      color: #001f4d;
+    }
+    .certificate h4 {
+      font-weight: 700;
+      margin-bottom: 14px;
+      color: #507dbb;
+    }
+    body.light-mode .certificate h4 {
+      color: #004a99;
+    }
+    .certificate p {
+      font-size: 1rem;
+      line-height: 1.4;
+      color: #486ca5cc;
+      margin-bottom: 8px;
+    }
+    body.light-mode .certificate p {
+      color: #305496cc;
+    }
+    .certificate small {
+      font-style: italic;
+      font-weight: 600;
+      color: #86a9e1;
+    }
+
+    /* Form */
+    form {
+      display: flex; flex-direction: column; gap: 15px;
+      max-width: 500px;
+      margin: auto;
+      user-select: none;
+    }
+    input, textarea {
+      padding: 12px 14px;
+      border: 1.5px solid #507dbb;
+      border-radius: 7px;
+      font-family: inherit;
+      font-size: 1rem;
+      color: #264871;
+      transition: border-color 0.3s ease;
+    }
+    input:focus, textarea:focus {
+      outline: none;
+      border-color: #70b3ff;
+      box-shadow: 0 0 10px rgba(112,179,255,0.6);
+      background-color: #e8f1ff;
+      color: #002b55;
+    }
+    button {
+      background: #507dbb;
+      color: #fff;
+      border: none;
+      padding: 14px 20px;
+      font-weight: 700;
+      border-radius: 30px;
+      cursor: pointer;
+      user-select: none;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+    button:hover, button:focus {
+      background: #70b3ff;
+      transform: scale(1.08);
+      outline: none;
+    }
+    body.light-mode input, body.light-mode textarea {
+      border-color: #004a99;
+      color: #003366;
+      background-color: #e6f0ff;
+    }
+    body.light-mode input:focus, body.light-mode textarea:focus {
+      border-color: #0063cc;
+      box-shadow: 0 0 10px rgba(0,123,255,0.6);
+      background-color: #cce2ff;
+      color: #002051;
+    }
+    body.light-mode button {
+      background: #004a99;
+    }
+    body.light-mode button:hover {
+      background: #0063cc;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      font-size: 0.9rem;
+      color: #507dbb99;
+      padding: 24px 10%;
+      user-select: none;
+      border-top: 1px solid rgba(80,125,187,0.15);
+      margin-top: 40px;
+    }
+    body.light-mode footer {
+      color: #004a9977;
+      border-top: 1px solid #a9c7ff55;
+    }
+
+    /* Accessibility focus */
+    a:focus, button:focus, input:focus, textarea:focus {
+      outline-offset: 3px;
+      outline: 3px solid #70b3ffcc;
+    }
+
+    /* Responsive */
+    @media (max-width: 720px) {
+      section { padding: 50px 5%; }
+      header { padding: 16px 5%; }
+      nav a { margin: 0 10px; font-size: 0.9rem; }
+      .btn { font-size: 1rem; padding: 12px 24px; }
+      .project img { height: 160px; }
+    }
+/* Hexágonos animados no fundo */
+
+.hexagon {
+  position: fixed;
+  width: 100px;
+  height: 55px;
+  background-color: rgba(0, 255, 213, 0.07); /* cor suave */
+  margin: 27.5px 0;
+  box-shadow: 0 0 10px rgba(0, 255, 213, 0.12);
+  clip-path: polygon(
+    25% 0%, 75% 0%, 
+    100% 50%, 75% 100%, 
+    25% 100%, 0% 50%
+  );
+  animation: spin 50s linear infinite;
+  transform-origin: center;
+  pointer-events: none;
+  z-index: -1;
+  will-change: transform;
+}
+
+.hex1 { top: 10%; left: 5%; animation-duration: 50s; }
+.hex2 { top: 70%; right: 10%; animation-duration: 45s; animation-direction: reverse; }
+.hex3 { bottom: 15%; left: 20%; animation-duration: 60s; }
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+/* Novos hexágonos com cores e opacidades variadas */
+.hex4 {
+  top: 30%;
+  right: 25%;
+  background-color: rgba(0, 255, 213, 0.04);
+  box-shadow: 0 0 6px rgba(0, 255, 213, 0.08);
+  animation-duration: 70s;
+}
+
+.hex5 {
+  bottom: 25%;
+  right: 40%;
+  background-color: rgba(0, 255, 213, 0.1);
+  box-shadow: 0 0 14px rgba(0, 255, 213, 0.18);
+  animation-duration: 40s;
+  animation-direction: reverse;
+}
+
+.hex6 {
+  top: 50%;
+  left: 40%;
+  background-color: rgba(0, 255, 213, 0.06);
+  box-shadow: 0 0 8px rgba(0, 255, 213, 0.12);
+  animation-duration: 55s;
+}
+#particles {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 0;
+  background: transparent;
+}
+section {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+section.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.cont-fn {
+  display: flex;
+  justify-content: center;
+  gap: 50px;
+  margin-top: 20px;
+}
+
+.cont-fn a {
+  color: #70b3ff;
+  text-decoration: none;
+  transition: color 0.3s ease;
+  border: 1px solid transparent;
+}
+
+.cont-fn a:hover {
+  color: #507dbb;
+}
+
+/* Versão light mode */
+body.light-mode .cont-fn a {
+  color: #004a99;
+}
+
+body.light-mode .cont-fn a:hover {
+  color: #0063cc;
+}
+.vr-mais{
+  display: inline-block;
+  margin-top: 20px;
+  color: #70b3ff;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.3s ease;
+}/* Largura da barra */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Trilho (fundo da barra) */
+::-webkit-scrollbar-track {
+  background: #0d0d0d; /* fundo escuro combina bem com portfólio moderno */
+  border-radius: 10px;
+}
+
+/* “Thumb” — parte que se move */
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #00f5ff, #00aaff); /* degradê vertical */
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 255, 255, 0.4); /* leve brilho */
+  transition: all 0.3s ease;
+}
+
+/* Ao passar o mouse */
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #00ffff, #0080ff);
+  box-shadow: 0 0 15px rgba(0, 255, 255, 0.7);
+}
+
+/* Canto entre barras (se houver) */
+::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+@keyframes scrollGlow {
+  0% { background-position: top; }
+  100% { background-position: bottom; }
+}
+ @keyframes scrollGlow {
+  0% { background-position: 0% 0%; }
+  100% { background-position: 0% 100%; }
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #00f5ff, #0077ff);
+  background-size: 100% 200%;
+  animation: scrollGlow 3s linear infinite alternate;
+}
+
+  </style>
+</head>
+<body>
+
+  <div id="scroll-progress"></div>
+
+  <header>
+    <h1>Thi_ii</h1>
+    <nav>
+      <a href="#sobre" data-pt="Sobre" data-en="About">Sobre</a>
+      <a href="#timeline" data-pt="História" data-en="History">História</a>
+      <a href="#skills" data-pt="Habilidades" data-en="Skills">Habilidades</a>
+      <a href="#services" data-pt="Serviços" data-en="Services">Serviços</a>
+      <a href="#projects" data-pt="Projetos" data-en="Projects">Projetos</a>
+      <a href="#certificates" data-pt="Certificados" data-en="Certificates">Certificados</a>
+      <a href="#contact" data-pt="Contato" data-en="Contact">Contato</a>
+      <button id="theme-toggle" aria-label="Modo Claro">Modo Claro</button>
+    </nav>
+  </header>
+
+<section class="hero" aria-label="Seção principal de apresentação">
+  <h2 id="typewriter" data-pt="Desenvolvedor Web Full-Stack<br>Especialista em Front-End" data-en="Full-Stack Web Developer<br>Front-End Specialist">
+    Desenvolvedor Web Full-Stack<br>Especialista em Front-End
+  </h2>
+  <p data-pt="Transformando ideias em experiências digitais modernas, rápidas e responsivas. Unindo design criativo e tecnologia de ponta."
+     data-en="Transforming ideas into modern, fast, and responsive digital experiences. Merging creative design with cutting-edge technology.">
+    Transformando ideias em experiências digitais modernas, rápidas e responsivas. Unindo design criativo e tecnologia de ponta.
+  </p>
+  <a href="#contact" class="btn" data-pt="Entre em Contato" data-en="Get in Touch">Entre em Contato</a>
+</section>
+
+
+  <section id="sobre" aria-label="Sobre Thi_ii">
+    <h2 data-pt="Sobre Mim" data-en="About Me">Sobre Mim</h2>
+    <p>Sou Thi_ii, desenvolvedor web com foco em front-end, mas com habilidades sólidas no back-end. Minha jornada começou há 1,5 ano, quando criei meus primeiros sites estáticos por curiosidade. Com o tempo, mergulhei no mundo do JavaScript, CSS3 e HTML, descobrindo que minha paixão estava em criar interfaces bonitas e funcionais.</p>
+    <p>Hoje, combino essa experiência com conhecimentos em Node.js, bancos de dados e APIs, entregando soluções completas que unem estética e performance. Trabalho com projetos próprios e colaborações, sempre buscando aprender novas tecnologias e tendências.</p>
+  </section>
+
+  <section id="timeline" aria-label="Linha do tempo da carreira">
+    <h2 data-pt="Minha História" data-en="My History">Minha História</h2>
+    <div class="timeline" role="list">
+      <div class="marco" role="listitem" tabindex="0">
+        <h4>Início na Programação</h4>
+        <small>2024</small>
+        <p>Primeiros passos criando sites HTML simples e explorando CSS Pelo o meu próprio celular.</p>
+      </div>
+      <div class="marco" role="listitem" tabindex="0">
+        <h4>Primeiro Projeto Real</h4>
+        <small>2024 / 2025</small>
+        <p>Criação de um site institucional completo para um pequeno negócio chamado NevEdu.</p>
+      </div>
+      <div class="marco" role="listitem" tabindex="0">
+        <h4>Transição para Full-Stack</h4>
+        <small>2025 / 2026</small>
+        <p>Aprendizado de Node.js, Express e bancos de dados SQL/NoSQL.</p>
+      </div>
+      <div class="marco" role="listitem" tabindex="0">
+        <h4>Projetos Profissionais</h4>
+        <small>2025 /2026 - Atual</small>
+        <p>Crio projetos pessoais que possam expandir para o mercado, como modelos de IA's, sistemas operacionais, sites Full-Stack e muitas mais coisas</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills" aria-label="Habilidades">
+    <h2 data-pt="Habilidades" data-en="Skills">Habilidades</h2>
+    <div class="skills">
+      <div class="skill" tabindex="0">HTML5 / CSS3</div>
+      <div class="skill" tabindex="0">JavaScript / TypeScript</div>
+      <div class="skill" tabindex="0"> Next.js</div>
+      <div class="skill" tabindex="0">Node.js / Express</div>
+      <div class="skill" tabindex="0">SQL / NoSQL</div>
+      <div class="skill" tabindex="0">Git / GitHub</div>
+      <div class="skill" tabindex="0">Design Responsivo</div>
+      <div class="skill" tabindex="0">Assembly / C</div>
+      <div class="skill" tabindex="0">PHP / Python</div>
+    </div>
+  </section>
+
+  <section id="services" aria-label="Serviços oferecidos">
+    <h2 data-pt="Serviços" data-en="Services">Serviços</h2>
+    <div id="services">
+      <div class="service" tabindex="0">
+        <h3>Desenvolvimento Front-End</h3>
+        <p>Criação de interfaces responsivas, acessíveis e otimizadas para dispositivos móveis e desktop.</p>
+      </div>
+      <div class="service" tabindex="0">
+        <h3>Desenvolvimento Back-End</h3>
+        <p>APIs RESTful, integrações com bancos de dados e lógica de negócios robusta utilizando Node.js.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects" aria-label="Projetos desenvolvidos">
+    <h2 data-pt="Projetos" data-en="Projects">Projetos</h2>
+    <div class="projects">
+      <div class="project" tabindex="0">
+        <img src="./NevEdu.png" alt="Screenshot do Dashboard Interativo" />
+        <div class="project-info">
+          <h3>Educação Tecnologica com IA</h3>
+          <p>Aplicação web com gráficos dinâmicos e integração com API de dados em tempo real.</p>
+          <small>Tecnologias: HTML Avançado, CSS Avançado, Javascript, Python, Banco de dados SQL...</small>
+        </div>
+      </div>
+      <div class="project" tabindex="0">
+        <img src="./CaldasDiromaLOC.png" alt="Screenshot da Plataforma E-commerce" />
+        <div class="project-info">
+          <h3>Plataforma de Locações de apartamentos em caldas novas</h3>
+          <p>Sistema de locação virtual, informações interativas e painel administrativo.</p>
+          <small>Tecnologias: Javascript, PHP, API, HTML, CSS.</small>
+        </div>
+      </div>
+    </div>
+    <a href="https://github.com/Thiago0010/" class="vr-mais">Ver Mais...</a>
+  </section>
+
+  <section id="certificates" aria-label="Certificados">
+    <h2 data-pt="Certificados" data-en="Certificates">Certificados</h2>
+    <div id="certificates">
+      <div class="certificate" tabindex="0">
+        <h4>Certificado em JavaScript Avançado</h4>
+        <p>Instituição: Origamid</p>
+        <small>Concluído em Julho de 2025</small>
+      </div>
+      <div class="certificate" tabindex="0">
+        <h4>Certificação HTML Professional</h4>
+        <p>Instituição: Origamid</p>
+        <small>Concluído em Fevereiro de 2025</small>
+      </div>
+      <div class="certificate" tabindex="0">
+        <h4>Curso Completo de CSS3</h4>
+        <p>Instituição: Origamid</p>
+        <small>Concluído em Fevereiro de 2025</small>
+      </div>
+      <div class="certificate" tabindex="0">
+        <h4>Curso Completo de PHP</h4>
+        <p>Instituição: Portal IDEA</p>
+        <small>Concluído em Junho de 2025</small>
+      </div>
+      <div class="certificate" tabindex="0">
+        <h4>Curso de Introdução ao Hacking e Pentest 2.0</h4>
+        <p>Instituição: Solyd Offensive Security</p>
+        <small>Concluído em dezembro de 2024</small>
+      </div>
+      <div class="certificate" tabindex="0">
+        <h4>Curso Completo de Banco de dados SQL</h4>
+        <p>Instituição: Origamid</p>
+        <small>Concluído em Agosto de 2025</small>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" aria-label="Formulário de contato">
+    <h2 data-pt="Contato" data-en="Contact Me">Contato</h2>
+    <form id="contact-form" aria-label="Formulário de contato">
+      <input type="text" id="name" name="name" placeholder="Nome" required aria-required="true" aria-label="Seu nome" />
+      <input type="email" id="email" name="email" placeholder="Email" required aria-required="true" aria-label="Seu email" />
+      <textarea id="message" name="message" rows="6" placeholder="Mensagem" required aria-required="true" aria-label="Sua mensagem"></textarea>
+      <button type="submit" class="btn">Enviar</button>
+      <div id="form-feedback" aria-live="polite"></div>
+    </form>
+    <div class="cont-fn">
+      <a href="https://wa.me/5561998889542">WhatsApp</a>
+      <a href="mailto:caselasthiago@gmail.com">E-mail</a>
+    </div>
+  </section>
+
+  <footer>
+    © 2025 Thi_ii — Desenvolvedor Web Full-Stack. Todos os direitos reservados.
+  </footer>
+
+  <script>
+    // Scroll progress bar
+    const progressBar = document.getElementById('scroll-progress');
+    window.addEventListener('scroll', () => {
+      const scrollTop = window.scrollY;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const scrollPercent = (scrollTop / docHeight) * 100;
+      progressBar.style.width = scrollPercent + '%';
+    });
+
+    // Animate sections on scroll
+    const sections = document.querySelectorAll('section');
+    const revealOnScroll = () => {
+      const triggerBottom = window.innerHeight * 0.9;
+      sections.forEach(section => {
+        const sectionTop = section.getBoundingClientRect().top;
+        if (sectionTop < triggerBottom) {
+          section.classList.add('visible');
+        }
+      });
+    };
+    window.addEventListener('scroll', revealOnScroll);
+    revealOnScroll(); // initial call
+
+    // Animate timeline items on load
+    const timelineItems = document.querySelectorAll('.marco');
+    timelineItems.forEach((item, index) => {
+      item.style.animationDelay = `${index * 0.3 + 0.1}s`;
+      item.style.animationPlayState = 'running';
+    });
+
+    // Language toggle EN/PT
+    const languageToggle = document.getElementById('language-toggle');
+    const elementsWithData = document.querySelectorAll('[data-en][data-pt]');
+    let currentLang = 'pt';
+
+    function switchLanguage() {
+      currentLang = currentLang === 'pt' ? 'en' : 'pt';
+      elementsWithData.forEach(el => {
+        el.innerHTML = el.getAttribute(`data-${currentLang}`);
+      });
+      languageToggle.textContent = currentLang.toUpperCase();
+      languageToggle.setAttribute('aria-label', currentLang === 'pt' ? 'Mudar para Inglês' : 'Switch to Portuguese');
+    }
+    languageToggle.addEventListener('click', switchLanguage);
+
+    // Theme toggle light/dark
+    const themeToggle = document.getElementById('theme-toggle');
+    themeToggle.addEventListener('click', () => {
+      document.body.classList.toggle('light-mode');
+      const isLight = document.body.classList.contains('light-mode');
+      themeToggle.textContent = isLight ? 'Modo Escuro' : 'Modo Claro';
+      themeToggle.setAttribute('aria-label', isLight ? 'Mudar para Modo Escuro' : 'Switch to Light Mode');
+    });
+
+    // Form submit simulation
+    const form = document.getElementById('contact-form');
+    const feedback = document.getElementById('form-feedback');
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+      feedback.textContent = 'Enviando...';
+      setTimeout(() => {
+        feedback.textContent = 'Mensagem enviada com sucesso! Obrigado pelo contato.';
+        form.reset();
+      }, 1500);
+    });
+
+    // Parallax subtle background movement on scroll
+    window.addEventListener('scroll', () => {
+      const scrollY = window.scrollY;
+      document.body.style.setProperty('--scrollY', scrollY);
+      // Adjust transforms on before and after for subtle 3D effect
+      const before = document.body.querySelector('::before');
+      const after = document.body.querySelector('::after');
+      // Use JS to update transforms for smooth parallax effect
+      document.body.style.setProperty('--beforeX', `${scrollY * 0.02}px`);
+      document.body.style.setProperty('--afterX', `${scrollY * -0.015}px`);
+    });
+    // Paralaxe hexágonos fundo
+const hex1 = document.querySelector('.hex1');
+const hex2 = document.querySelector('.hex2');
+const hex3 = document.querySelector('.hex3');
+
+window.addEventListener('scroll', () => {
+  const scrollY = window.scrollY;
+  hex1.style.transform = `rotate(${(scrollY / 50) % 360}deg) translateY(${scrollY * 0.1}px)`;
+  hex2.style.transform = `rotate(${-(scrollY / 45) % 360}deg) translateY(${scrollY * 0.07}px)`;
+  hex3.style.transform = `rotate(${(scrollY / 60) % 360}deg) translateY(${scrollY * 0.12}px)`;
+});
+const hex4 = document.querySelector('.hex4');
+const hex5 = document.querySelector('.hex5');
+const hex6 = document.querySelector('.hex6');
+
+window.addEventListener('scroll', () => {
+  const scrollY = window.scrollY;
+  hex1.style.transform = `rotate(${(scrollY / 50) % 360}deg) translateY(${scrollY * 0.1}px)`;
+  hex2.style.transform = `rotate(${-(scrollY / 45) % 360}deg) translateY(${scrollY * 0.07}px)`;
+  hex3.style.transform = `rotate(${(scrollY / 60) % 360}deg) translateY(${scrollY * 0.12}px)`;
+  hex4.style.transform = `rotate(${-(scrollY / 65) % 360}deg) translateY(${scrollY * 0.08}px)`;
+  hex5.style.transform = `rotate(${(scrollY / 55) % 360}deg) translateY(${scrollY * 0.05}px)`;
+  hex6.style.transform = `rotate(${-(scrollY / 70) % 360}deg) translateY(${scrollY * 0.09}px)`;
+});
+(() => {
+  // Máquina de escrever no h2 da hero
+  const h2 = document.getElementById('typewriter');
+
+  // Escolhe o texto baseado no idioma (pt padrão)
+  const lang = document.documentElement.lang || 'pt-BR';
+  const isPT = lang.toLowerCase().startsWith('pt');
+  const rawText = isPT ? h2.dataset.pt : h2.dataset.en;
+
+  // Remove o texto atual para digitar
+  h2.innerHTML = '';
+
+  let index = 0;
+  // Transforma o texto em array de caracteres, tratando <br> como caractere especial
+  // Para isso vamos extrair pedaços para preservar <br>
+  const chars = [];
+  const regex = /<br\s*\/?>/gi;
+  let lastIndex = 0;
+  let match;
+  while ((match = regex.exec(rawText)) !== null) {
+    if(match.index > lastIndex) {
+      chars.push(...rawText.substring(lastIndex, match.index).split(''));
+    }
+    chars.push('<br>');
+    lastIndex = match.index + match[0].length;
+  }
+  if(lastIndex < rawText.length) {
+    chars.push(...rawText.substring(lastIndex).split(''));
+  }
+
+  function type() {
+    if(index < chars.length) {
+      if(chars[index] === '<br>') {
+        h2.innerHTML += '<br>';
+      } else {
+        h2.innerHTML += chars[index];
+      }
+      index++;
+      setTimeout(type, 70);
+    }
+  }
+  type();
+const form = document.getElementById('contact');
+
+  form.addEventListener('submit', function(event) {
+    event.preventDefault(); // Evita o envio normal do form
+
+    const name = document.getElementById('name').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const message = document.getElementById('message').value.trim();
+
+    // Monta a mensagem que vai pro WhatsApp
+    let text = `Olá, meu nome é ${name}.\n Meu E-Mail é: ${email}\n Vim do seu site de formulário.  ${message}`;
+
+    // Codifica a mensagem para URL
+    let encodedText = encodeURIComponent(text);
+
+    // Seu número com código do país e DDD, sem espaços nem símbolos (ex: 5511999998888)
+    let whatsappNumber = '5561998889542';
+
+    // URL para abrir o WhatsApp Web ou app direto na conversa com a mensagem pronta
+    let whatsappURL = `https://wa.me/${whatsappNumber}?text=${encodedText}`;
+
+    // Abre a URL (abre uma nova aba no navegador)
+    window.open(whatsappURL, '_blank');
+  });
+  // Fade-in nas seções com delay
+  const sections = document.querySelectorAll('section');
+  function checkSections() {
+    const triggerBottom = window.innerHeight * 0.85;
+    sections.forEach((section, i) => {
+      const top = section.getBoundingClientRect().top;
+      if(top < triggerBottom) {
+        setTimeout(() => section.classList.add('visible'), i * 150);
+      }
+    });
+  }
+  window.addEventListener('scroll', checkSections);
+  window.addEventListener('load', checkSections);
+})();
+
+  </script>
+<div class="hexagon hex1"></div>
+<div class="hexagon hex2"></div>
+<div class="hexagon hex3"></div>
+<div class="hexagon hex4"></div>
+<div class="hexagon hex5"></div>
+<div class="hexagon hex6"></div>
+<canvas id="particles"></canvas>
+
+</body>
+</html>
